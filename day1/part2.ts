@@ -1,4 +1,4 @@
-import { convertStringToArrayOfArrays, sumArray } from "./part1";
+import { convertStringToArrayOfArrays, sumArray } from "./utils";
 
 const getLargestThreeCaloriesOfAllElves = (allCalories: string) => {
   const separatedElvesCalories: string[][] =

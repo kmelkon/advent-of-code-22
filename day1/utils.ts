@@ -6,13 +6,16 @@ export const convertStringToArrayOfArrays = (
     throw new Error("allCalories is not a string of numbers");
   }
 
-  const elvesCalories: string[] = allCalories.split("\n\n");
-  const separatedElvesCalories: string[][] = elvesCalories.map((x, index) =>
-    elvesCalories[index].split("\n")
-  );
-
+  const separatedElvesCalories: string[][] = allCalories
+    .split("\n\n")
+    .map((x) => x.split("\n"));
   return separatedElvesCalories;
 };
 
-export const sumArray = (array: string[]): number =>
-  array.reduce((partialSum, a) => partialSum + Number(a), 0);
+export const sumArray = (array: string[]): number => {
+  return array.reduce((partialSum, a) => {
+    const numberified = Number(a);
+    if (isNaN(numberified)) throw new Error("array contains non-numbers");
+    return partialSum + numberified;
+  }, 0);
+};

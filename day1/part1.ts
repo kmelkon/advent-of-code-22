@@ -1,4 +1,4 @@
-const input: string = `4035
+export const input: string = `4035
 10596
 17891
 5278
@@ -2254,18 +2254,31 @@ const input: string = `4035
 2281
 1895`;
 
-const convertStringToArrayOfArrays = (allCalories: string): string[][] => {
-  const elvesCalories: string[] = allCalories.split("\n\n");
-  const separatedElvesCalories: string[][] = elvesCalories.map((x, index) =>
-    elvesCalories[index].split("\n")
+const getLargestCaloriesOfAllElves = (
+  allCaloriesOfAllElves: string
+): number => {
+  const convertStringToArrayOfArrays = (allCalories: string): string[][] => {
+    const noWhiteSpaceCalories = allCalories.replace(/\s/g, "");
+    if (isNaN(Number(noWhiteSpaceCalories))) {
+      throw new Error("allCalories is not a string of numbers");
+    }
+
+    const elvesCalories: string[] = allCalories.split("\n\n");
+    const separatedElvesCalories: string[][] = elvesCalories.map((x, index) =>
+      elvesCalories[index].split("\n")
+    );
+
+    return separatedElvesCalories;
+  };
+
+  const separatedElvesCalories: string[][] = convertStringToArrayOfArrays(
+    allCaloriesOfAllElves
   );
 
-  return separatedElvesCalories;
+  const ElvesCaloriesSummed = separatedElvesCalories.map((x) =>
+    x.reduce((partialSum, a) => partialSum + Number(a), 0)
+  );
+  return Math.max(...ElvesCaloriesSummed);
 };
 
-const separatedElvesCalories: string[][] = convertStringToArrayOfArrays(input);
-
-const ElvesCaloriesSummed = separatedElvesCalories.map((x) =>
-  x.reduce((partialSum, a) => partialSum + Number(a), 0)
-);
-const maxCaloriesOfAllElves = Math.max(...ElvesCaloriesSummed);
+export default getLargestCaloriesOfAllElves;

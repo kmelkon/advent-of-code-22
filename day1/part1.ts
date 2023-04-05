@@ -6,7 +6,6 @@ const getLargestCaloriesOfAllElves = (
   const separatedElvesCalories: string[][] = convertStringToArrayOfArrays(
     allCaloriesOfAllElves
   );
-
   const ElvesCaloriesSummed = separatedElvesCalories.map((x) => sumArray(x));
   return Math.max(...ElvesCaloriesSummed);
 };

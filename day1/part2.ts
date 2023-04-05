@@ -4,9 +4,14 @@ const getLargestThreeCaloriesOfAllElves = (allCalories: string) => {
   const separatedElvesCalories: string[][] =
     convertStringToArrayOfArrays(allCalories);
 
-  const ElvesCaloriesSummed = separatedElvesCalories.map((x) => sumArray(x));
-  const sortedElvesCaloriesSummed = ElvesCaloriesSummed.sort((a, b) => b - a);
-  return sortedElvesCaloriesSummed.slice(0, 3);
+  const topThreeElves = separatedElvesCalories
+    .map((x) => sumArray(x))
+    .sort((a, b) => b - a)
+    .slice(0, 3)
+    .map((x) => x.toString());
+
+  const sumOfTopThreeElves = sumArray(topThreeElves);
+  return sumOfTopThreeElves;
 };
 
 export default getLargestThreeCaloriesOfAllElves;
